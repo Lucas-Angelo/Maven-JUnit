@@ -1,15 +1,22 @@
 package org.lcs2001;
 
 // import org.junit.Assert; // Essa é a Assertiva do JUnit, não tão completa
+import org.junit.Before;
 import org.junit.Test;
 import org.assertj.core.api.Assertions;
 
 public class PrimeiroTeste {
 
+    Calculadora calculadora;
+
+    @Before //Antes de cada método dessa classe, executa esse método Before
+    public void setUp() {
+        calculadora = new Calculadora();
+    }
+
     @Test
     public void deveSomar2Numeros() {
         // cenário
-        Calculadora calculadora = new Calculadora();
         double numero1=10, numero2=5;
 
         // execução
@@ -33,7 +40,6 @@ public class PrimeiroTeste {
     @Test
     public void deveSubtrair2Numeros() {
         // cenário
-        Calculadora calculadora = new Calculadora();
         double numero1=-15, numero2=5.5;
 
         // execução
@@ -46,7 +52,6 @@ public class PrimeiroTeste {
     @Test
     public void deveMultiplicar2Numeros() {
         // cenário
-        Calculadora calculadora = new Calculadora();
         double numero1=5, numero2=-5;
 
         // execução
@@ -56,11 +61,22 @@ public class PrimeiroTeste {
         Assertions.assertThat(resultado).isEqualTo(-25);
     }
 
+    @Test
+    public void deveDividirDoisNumeros() {
+        // cenário
+        double numero1=-10, numero2=5;
+
+        // execução
+        double resultado = calculadora.dividir(numero1, numero2);
+
+        // verificações
+        Assertions.assertThat(resultado).isEqualTo(-2);
+    }
+
     @Test (expected = RuntimeException.class) // Para não dar erro, já se é esperado retornar uma execessão de dividir por zero
     public void naoDeveDividirPorZero() {
         // cenário
-        Calculadora calculadora = new Calculadora();
-        double numero1=10, numero2=0;
+        int numero1=10, numero2=0;
 
         calculadora.dividir(numero1, numero2);
     }
@@ -69,7 +85,7 @@ public class PrimeiroTeste {
 class Calculadora {
 
     double somar(double num1, double num2) {
-            return num1+num2;
+        return num1+num2;
     }
 
     double subtrair(double num1, double num2) {
@@ -82,7 +98,7 @@ class Calculadora {
 
     double dividir(double num1, double num2) {
         if(num2==0)
-            throw new RuntimeException("Não é permitido dividir por zero!");
+            throw new RuntimeException("Não é possível dividir por zero!");
         else
             return num1/num2;
     }
