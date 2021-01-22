@@ -80,6 +80,14 @@ public class PrimeiroTeste {
 
         calculadora.dividir(numero1, numero2);
     }
+
+    @Test (expected = ArithmeticException.class) // Para não dar erro, já se é esperado retornar uma execessão de dividir por zero
+    public void naoDeveDividirPorZeroExcessaoAritmetica() {
+        // cenário
+        int numero1=10, numero2=0;
+
+        calculadora.dividirSemVerificar(numero1, numero2);
+    }
 }
 
 class Calculadora {
@@ -101,6 +109,10 @@ class Calculadora {
             throw new RuntimeException("Não é possível dividir por zero!");
         else
             return num1/num2;
+    }
+
+    float dividirSemVerificar(int num1, int num2) {
+        return num1/num2;
     }
 
 }
