@@ -10,7 +10,7 @@ public class PrimeiroTeste {
     public void deveSomar2Numeros() {
         // cenário
         Calculadora calculadora = new Calculadora();
-        int numero1=10, numero2=5;
+        double numero1=10, numero2=5;
 
         // execução
         double resultado = calculadora.somar(numero1, numero2);
@@ -34,20 +34,20 @@ public class PrimeiroTeste {
     public void deveSubtrair2Numeros() {
         // cenário
         Calculadora calculadora = new Calculadora();
-        int numero1=-15, numero2=5;
+        double numero1=-15, numero2=5.5;
 
         // execução
         double resultado = calculadora.subtrair(numero1, numero2);
 
         // verificações
-        Assertions.assertThat(resultado).isEqualTo(-20);
+        Assertions.assertThat(resultado).isEqualTo(-20.5);
     }
 
     @Test
     public void deveMultiplicar2Numeros() {
         // cenário
         Calculadora calculadora = new Calculadora();
-        int numero1=5, numero2=-5;
+        double numero1=5, numero2=-5;
 
         // execução
         double resultado = calculadora.multiplicar(numero1, numero2);
@@ -60,7 +60,7 @@ public class PrimeiroTeste {
     public void naoDeveDividirPorZero() {
         // cenário
         Calculadora calculadora = new Calculadora();
-        int numero1=10, numero2=0;
+        double numero1=10, numero2=0;
 
         calculadora.dividir(numero1, numero2);
     }
