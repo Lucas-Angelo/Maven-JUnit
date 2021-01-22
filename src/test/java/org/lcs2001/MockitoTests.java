@@ -1,17 +1,17 @@
 package org.lcs2001;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith (MockitoJUnitRunner.class) // Para o @Mock funcionar, classe deve rodar com esse Runner do Mockito
+@ExtendWith(MockitoExtension.class)
 public class MockitoTests {
 
     @Mock

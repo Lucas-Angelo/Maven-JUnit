@@ -1,11 +1,13 @@
 package org.lcs2001;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class CadastroPessoasTest {
 
     @Test
+    @DisplayName("Deve criar o cadastro de pessoas")
     public void deveCriarOCadastroDePessoas(){
         // cenário e execução
         CadastroPessoas cadastro = new CadastroPessoas();
@@ -15,6 +17,7 @@ public class CadastroPessoasTest {
     }
 
     @Test
+    @DisplayName("Deve adicionar uma pessoa na lista")
     public void deveAdicionarUmaPessoa() {
         // cenário
         CadastroPessoas cadastroPessoas = new CadastroPessoas();
@@ -31,17 +34,21 @@ public class CadastroPessoasTest {
                 .contains(pessoa);
     }
 
-    @Test (expected = PessoaSemNomeException.class)
+    @Test
+    @DisplayName("Não deve deixar adicionar pessoas com nome vazio")
     public void naoDeveAdicionarPessoaComNomeVazio() {
         // Cenário
         CadastroPessoas cadastroPessoa = new CadastroPessoas();
         Pessoa pessoa = new Pessoa();
 
         // Execução
-        cadastroPessoa.adicionar(pessoa);
+        org.junit.jupiter.api.Assertions.assertThrows(
+                PessoaSemNomeException.class, () -> cadastroPessoa.adicionar(pessoa)
+        );
     }
 
     @Test
+    @DisplayName("Deve remover uma pessoa")
     public void deveRemoverUmaPessoa() {
         // Cenário
         CadastroPessoas cadastroPessoa = new CadastroPessoas();
@@ -56,13 +63,17 @@ public class CadastroPessoasTest {
         Assertions.assertThat(cadastroPessoa.getPessoas()).isEmpty();
     }
 
-    @Test (expected = CadastroVazioException.class)
+    @Test
+    @DisplayName("Deve lançar um erro ao tentar remover uma pessoas inexistente")
     public void deveLancarErroAoTentarRemoverPessoaInexistente() {
         // Cenário
         CadastroPessoas cadastroPessoa = new CadastroPessoas();
         Pessoa pessoa = new Pessoa();
 
-        cadastroPessoa.remover(pessoa);
+        // Execução
+        org.junit.jupiter.api.Assertions.assertThrows(
+                CadastroVazioException.class, () -> cadastroPessoa.remover(pessoa)
+        );
     }
 
 }

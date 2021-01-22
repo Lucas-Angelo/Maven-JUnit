@@ -1,15 +1,15 @@
 package org.lcs2001;
 
 // import org.junit.Assert; // Essa é a Assertiva do JUnit, não tão completa
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 
 public class PrimeiroTeste {
 
     Calculadora calculadora;
 
-    @Before //Antes de cada método dessa classe, executa esse método Before
+    @BeforeEach //Antes de cada método dessa classe, executa esse método Before
     public void setUp() {
         calculadora = new Calculadora();
     }
@@ -73,20 +73,26 @@ public class PrimeiroTeste {
         Assertions.assertThat(resultado).isEqualTo(-2);
     }
 
-    @Test (expected = RuntimeException.class) // Para não dar erro, já se é esperado retornar uma execessão de dividir por zero
+    @Test
     public void naoDeveDividirPorZero() {
         // cenário
         int numero1=10, numero2=0;
 
-        calculadora.dividir(numero1, numero2);
+        // Para não dar erro, já se é esperado retornar uma execessão de dividir por zero
+        org.junit.jupiter.api.Assertions.assertThrows(
+                RuntimeException.class, () -> calculadora.dividir(numero1, numero2)
+        );
     }
 
-    @Test (expected = ArithmeticException.class) // Para não dar erro, já se é esperado retornar uma execessão de dividir por zero
+    @Test
     public void naoDeveDividirPorZeroExcessaoAritmetica() {
         // cenário
         int numero1=10, numero2=0;
 
-        calculadora.dividirSemVerificar(numero1, numero2);
+
+        org.junit.jupiter.api.Assertions.assertThrows(
+                ArithmeticException.class, () -> calculadora.dividirSemVerificar(numero1, numero2)
+        );
     }
 }
 
